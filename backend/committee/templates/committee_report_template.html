@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- <title>TKM College of Engineering - NBA Accreditation Visit Preparations</title> -->
+    <title>{% if not is_pdf %}TKM College of Engineering - NBA Accreditation Visit Preparations{% endif %}</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .general-administration {
+            display: flex;
+            justify-content: space-between; /* Space between left and right elements */
+            align-items: center; /* Center items vertically */
+            font-weight: bold; /* Make text bold */
+            font-size: 15px; /* Set font size */
+        }
+        .order-number {
+            margin: 0; /* Remove margin for proper alignment */
+        }
+        .order-date {
+            margin: 0; /* Remove margin for proper alignment */
+        }
+        .sign{
+            text-align: right;
+        }
+        .administration{
+            text-align: center;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body style="font-family: 'Times New Roman', Times, serif;">
+
+    <header>
+        <p style="text-align: center; font-weight: bold; font-size: 18px; line-height: 0.5;">TKM COLLEGE OF ENGINEERING</p>
+        <p style="text-align: center; font-size: 15px; line-height: 0.1; font-weight: bold;">(Government Aided and Autonomous)</p>
+        <p style="text-align: center; font-size: 15px; font-weight: bold; line-height: 0.1;">Kollam-5</p>
+    </header>
+
+    <section class="abstract">
+        <p style="text-align: center;">Abstract</p>
+        <p style="text-align: left;">{{ committe_name }} - {{ order_text }} <hr style="height:1px; background: black; text-align:left; margin-left:0;"></p>
+    </section>
+    <p class="administration"> General Administration</p>
+    <section class="general-administration">
+       
+        <p class="order-number">{{ order_number }}</p>
+        <p class="order-date">{{ order_date }}</p>
+    </section>
+    <hr style="height:1px; background: black; text-align:left; margin-left:0;">
+
+    <section class="order">
+        <p style="text-align: center; font-weight: bold; font-size: 20px;"><u>ORDER</u></p>
+        <p>{{ order_description }}</p>
+        
+        <br>
+        <p style="padding-left: 25px; font-weight: bold; font-size: 18px;"><u>{{ committe_name }} :</u></p>
+        <ol>
+            {% for member in main_members %}
+                <li>{{ member.employee.name }} - {{ member.employee.department_name }}</li>
+            {% endfor %}
+        </ol>
+
+        <ul style="list-style-type: upper-roman;">
+            {% for sub_committee in sub_committees %}
+                <li>
+                    <h3 style="padding-left: 30px;"><u>{{ sub_committee.sub_committee_name }}</u></h3>
+                </li>
+                
+                
+                <h4>Members</h4>
+                <ol>
+                    {% for member in sub_committee.members %}
+                        <li>{{ member.employee.name }} - {{ member.employee.department_name }}</li>
+                    {% endfor %}
+                </ol>
+            {% endfor %}
+        </ul>
+    </section>
+    <section class="sign" >
+            {{role}}
+    </section>
+    <section class="tocpoyto">
+        <p>To&ensp;&ensp;&ensp;&ensp;&ensp;:&ensp;  {{receiver_name}}</p>
+        <p>Copy to :</p>
+
+    </section>
